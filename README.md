@@ -1,23 +1,16 @@
-# terraform-{{ provider }}-{{ component/stack }}
+# terraform-k8s-modelconverter
 
-{{ Insert brief overview here - this file will be injected into the README by the github action }}
+{{ Insert brief overview here in the .header.md file - this file will be injected into the README by the github action }}
 
 ## Usage
 
 ```terraform
-module "{{ component/stack }}" {
-  source  = "combinator-ml/{{ component/stack }}/{{ provider }}"
-  version = "0.0.0"
+module "modelconverter" {
+  source  = "combinator-ml/modelconverter/k8s"
 }
 ```
 
 See the full configuration options below.
-
-## Known Issues
-
-- {{ Known Issue 1 }}
-  {{ Known Issue description }}
-- ...
 
 ## Requirements
 
@@ -27,7 +20,7 @@ No requirements.
 
 | Name | Version |
 |------|---------|
-| kubernetes | n/a |
+| helm | n/a |
 
 ## Modules
 
@@ -37,12 +30,13 @@ No Modules.
 
 | Name |
 |------|
-| [kubernetes_namespace](https://registry.terraform.io/providers/hashicorp/kubernetes/latest/docs/resources/namespace) |
+| [helm_release](https://registry.terraform.io/providers/hashicorp/helm/latest/docs/resources/release) |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| name\_prefix | Prefix to be used when naming the different k8s components | `string` | `"combinator"` | no |
 | namespace | The namespace to install into. | `string` | `"default"` | no |
 
 ## Outputs
