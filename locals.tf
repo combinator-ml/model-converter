@@ -1,10 +1,6 @@
 locals {
-  chart_repository = "https://feast-helm-charts.storage.googleapis.com" # TODO
-  chart_name       = "feast"                                            # TODO
-  chart_version    = "0.100.4"                                          # TODO
-  helm_values = {                                                       # TODO
-    redis = {
-      enabled = true
-    }
-  }
+  chart_repository = "https://mlopsworks.github.io/containerizer"
+  chart_name       = "containerizer"
+  chart_version    = "0.1.0"
+  helm_values      = {}
 }
