@@ -14,7 +14,7 @@ module "minio" {
   }
 
   values = [
-    file("conf/minio_values.yaml")
+    file("../../conf/minio_values.yaml")
   ]
 
   set = [
