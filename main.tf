@@ -20,10 +20,10 @@ module "minio" {
   set = [
     {
       name  = "accessKey"
-      value = "minio"
+      value = var.minio_access_key
     },{
       name  = "secretKey"
-      value = "minio123"
+      value = var.minio_secret_key
     },{
       name  = "generate-name"
       value = "minio/minio"
