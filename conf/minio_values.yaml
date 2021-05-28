@@ -175,7 +175,7 @@ imagePullSecrets: []
 # - name: "image-pull-secret"
 
 ingress:
-  enabled: true
+  enabled: false
   labels: {}
     # node-role.kubernetes.io/ingress: platform
 
