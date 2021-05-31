@@ -54,4 +54,3 @@ resource "kubernetes_service" "jupyter" {
     module.jupyter
   ]
 }
-
