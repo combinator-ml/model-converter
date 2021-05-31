@@ -40,12 +40,9 @@ base:
     KUBE_CONFIG_PATH=~/.kube/config terraform apply -auto-approve
     wget https://dl.min.io/client/mc/release/linux-amd64/mc
     chmod +x ./mc
-    echo "CHMOD"
-    minio_addr=http://`kubectl get service minio -o jsonpath='{.spec.clusterIP}`:9000'
-    echo "ADDR"
+    minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
     ./mc alias set minio $minio_addr minio minio123
-    echo "ALIAS"
-    containerizer_pod=`kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n'`
+    containerizer_pod=$(kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl cp $containerizer_name:volume ./
     ./mc cp --recursive volume/proxy minio/workspace/
     ./mc cp --recursive volume/flavours minio/workspace/
