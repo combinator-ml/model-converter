@@ -55,3 +55,14 @@ resource "kubernetes_service" "jupyter" {
     module.jupyter
   ]
 }
+
+# Wait for the pod to start then copy the notebook into the working directory of the pod
+# Any changes will only exist inside the pod. Download the notebook if you want a copy.
+resource "null_resource" "copy_notebook" {
+  provisioner "local-exec" {
+    command = "kubectl -n ${var.namespace} rollout status deployment/combinator-jupyter-deployment && kubectl -n ${var.namespace} cp demo.ipynb $(kubectl -n ${var.namespace} get po -l app=combinator-jupyter -o custom-columns=POD:.metadata.name --no-headers):/home/jovyan"
+  }
+  depends_on = [
+    module.jupyter
+  ]
+}
