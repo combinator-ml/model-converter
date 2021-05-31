@@ -43,11 +43,12 @@ base:
     minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
     ./mc alias set minio $minio_addr minio minio123
     containerizer_pod=$(kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
-    echo "POD: $containerizer_pod"
     kubectl cp $containerizer_pod:volume ./volume
     ls
     ./mc cp --recursive volume/proxy minio/workspace/
     ./mc cp --recursive volume/flavours minio/workspace/
+    combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
+    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/containerizer-model-sdk'
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
   # https://github.com/kubeflow/kubeflow/issues/5246#issuecomment-682013220
