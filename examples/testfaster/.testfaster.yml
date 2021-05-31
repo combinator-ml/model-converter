@@ -74,6 +74,7 @@ launch:
     - title: Jupyter
       port: 30600
   homepage: |
-    ### Example
+    Click the two links to the left to get started with Pachyderm:
 
-    TODO
+    1. Click the Jupyter link and launch the `demo.ipynb` notebook.
+    2. Click on the Dashboard link to launch the Pachyderm Enterprise Dashboard.
