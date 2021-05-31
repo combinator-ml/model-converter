@@ -49,6 +49,7 @@ base:
     ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/containerizer-model-sdk sklearn xgboost torch'
+    kubectl exec -ti $combinator_pod -- mkdir -p model
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
   # https://github.com/kubeflow/kubeflow/issues/5246#issuecomment-682013220
