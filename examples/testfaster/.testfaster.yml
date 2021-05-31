@@ -43,9 +43,9 @@ base:
     minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
     ./mc alias set minio $minio_addr minio minio123
     containerizer_pod=$(kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl cp $containerizer_pod:volume ./
-    ./mc cp --recursive volume/proxy minio/workspace/
-    ./mc cp --recursive volume/flavours minio/workspace/
+    # kubectl cp $containerizer_pod:volume ./
+    # ./mc cp --recursive volume/proxy minio/workspace/
+    # ./mc cp --recursive volume/flavours minio/workspace/
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
   # https://github.com/kubeflow/kubeflow/issues/5246#issuecomment-682013220
