@@ -17,7 +17,8 @@ resource "kubernetes_namespace" "namespace" {
 }
 
 module "modelconverter" {
-  source    = "combinator-ml/modelconverter/k8s"
+  # source    = "combinator-ml/modelconverter/k8s"
+  source    = "../.."
   namespace = var.namespace
   depends_on = [
     kubernetes_namespace.namespace
