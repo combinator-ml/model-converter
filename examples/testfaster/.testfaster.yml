@@ -1,5 +1,5 @@
 name: Model Converter - Combinator Component
-shared: true
+#shared: true
 base:
   kernel_image: quay.io/testfaster/ignite-kernel
   os_dockerfile: |-
