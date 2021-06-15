@@ -46,7 +46,7 @@ base:
     containerizer_pod=$(kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl cp $containerizer_pod:volume ./volume
     ls
-    ./mc cp --recursive volume/proxy minio/workspace/
+    # ./mc cp --recursive volume/proxy minio/workspace/
     ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/containerizer-model-sdk sklearn xgboost torch'
