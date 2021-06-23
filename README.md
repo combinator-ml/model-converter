@@ -24,7 +24,9 @@ No requirements.
 
 ## Modules
 
-No Modules.
+| Name | Source | Version |
+|------|--------|---------|
+| minio | terraform-module/release/helm |  |
 
 ## Resources
 
@@ -36,6 +38,9 @@ No Modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| minio\_access\_key | The namespace to install into. | `string` | `"minio"` | no |
+| minio\_address | The namespace to install into. | `string` | `"http://minio.default.svc.cluster.local:9000"` | no |
+| minio\_secret\_key | The namespace to install into. | `string` | `"minio123"` | no |
 | name\_prefix | Prefix to be used when naming the different k8s components | `string` | `"combinator"` | no |
 | namespace | The namespace to install into. | `string` | `"default"` | no |
 
