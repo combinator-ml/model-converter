@@ -22,6 +22,8 @@ base:
     - k8s.gcr.io/kube-proxy:v1.17.11
     - k8s.gcr.io/kube-scheduler:v1.17.11
     - k8s.gcr.io/pause:3.1
+    - minio/minio:RELEASE.2021-02-14T04-01-33Z
+    - minio/mc:RELEASE.2021-02-14T04-28-06Z
     # NB: use:
     #     testctl ssh --tty=false -- docker images --format "{{.Repository}}:{{.Tag}}" |sort |sed 's/^/    - /g'
     # and then remove ':<none>' tags
