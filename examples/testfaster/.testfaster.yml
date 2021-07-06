@@ -36,8 +36,8 @@ base:
     # already running when you testctl get
     #!/bin/bash
     set -euo pipefail
-    # git clone https://github.com/combinator-ml/terraform-k8s-modelconverter repo
-    git clone https://github.com/carmilso/terraform-kk repo
+    git clone https://github.com/combinator-ml/terraform-k8s-modelconverter repo
+    # git clone https://github.com/carmilso/terraform-kk repo
     cd repo/examples/testfaster
     terraform init
     KUBE_CONFIG_PATH=~/.kube/config terraform apply -auto-approve
