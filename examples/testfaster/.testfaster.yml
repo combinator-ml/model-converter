@@ -45,13 +45,13 @@ base:
     chmod +x ./mc
     minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
     ./mc alias set minio $minio_addr minio minio123
-    containerizer_pod=$(kubectl get pods --selector=app.kubernetes.io/name=containerizer --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl cp $containerizer_pod:volume ./volume
+    chassis_pod=$(kubectl get pods --selector=app.kubernetes.io/name=chassis --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
+    kubectl cp $chassis_pod:volume ./volume
     ls
     # ./mc cp --recursive volume/proxy minio/workspace/
     ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/containerizer-model-sdk sklearn xgboost torch mlflow'
+    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassis-sdk sklearn xgboost torch mlflow'
     kubectl exec -ti $combinator_pod -- mkdir -p model
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
@@ -72,11 +72,11 @@ default_lease_timeout: "1h"
 pool_sleep_timeout: "7d"
 
 launch:
-  title: Containerizer
+  title: Chassis
   buttons:
     - title: Jupyter
       port: 30600
   homepage: |
-    Click the link to the left to get started with Containerizer:
+    Click the link to the left to get started with Chassis:
 
     1. Click the Jupyter link and launch the `demo.ipynb` notebook.

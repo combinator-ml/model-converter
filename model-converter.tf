@@ -1,4 +1,4 @@
-resource "helm_release" "model-converter" {
+resource "helm_release" "chassis" {
   name             = var.name_prefix
   repository       = local.chart_repository
   chart            = local.chart_name
