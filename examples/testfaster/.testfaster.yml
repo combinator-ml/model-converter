@@ -51,7 +51,7 @@ base:
     # ./mc cp --recursive volume/proxy minio/workspace/
     ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassis-sdk sklearn xgboost torch mlflow'
+    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassisml-sdk sklearn xgboost torch mlflow'
     kubectl exec -ti $combinator_pod -- mkdir -p model
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
