@@ -79,4 +79,4 @@ launch:
   homepage: |
     Click the link to the left to get started with Chassis:
 
-    1. Click the Jupyter link and launch the `demo.ipynb` notebook.
+    1. Click the Jupyter link and launch the `svc_demo.ipynb` notebook.
