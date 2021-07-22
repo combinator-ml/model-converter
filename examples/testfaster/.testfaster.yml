@@ -41,7 +41,7 @@ base:
     cd repo/examples/testfaster
     terraform init
     KUBE_CONFIG_PATH=~/.kube/config terraform apply -auto-approve
-    wget https://dl.min.io/client/mc/release/linux-amd64/mc
+    # wget https://dl.min.io/client/mc/release/linux-amd64/mc
     # chmod +x ./mc
     # minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
     # ./mc alias set minio $minio_addr minio minio123
