@@ -1,4 +1,4 @@
-# terraform-k8s-chassis
+# terraform-k8s-modelconverter
 
 {{ Insert brief overview here in the .header.md file - this file will be injected into the README by the github action }}
 
