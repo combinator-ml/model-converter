@@ -36,20 +36,20 @@ base:
     # already running when you testctl get
     #!/bin/bash
     set -euo pipefail
-    git clone https://github.com/combinator-ml/terraform-k8s-modelconverter repo
+    git clone https://github.com/combinator-ml/terraform-k8s-chassis repo
     # git clone https://github.com/carmilso/terraform-kk repo
     cd repo/examples/testfaster
     terraform init
     KUBE_CONFIG_PATH=~/.kube/config terraform apply -auto-approve
-    wget https://dl.min.io/client/mc/release/linux-amd64/mc
-    chmod +x ./mc
-    minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
-    ./mc alias set minio $minio_addr minio minio123
-    chassis_pod=$(kubectl get pods --selector=app.kubernetes.io/name=chassis --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl cp $chassis_pod:volume ./volume
-    ls
+    # wget https://dl.min.io/client/mc/release/linux-amd64/mc
+    # chmod +x ./mc
+    # minio_addr=http://$(kubectl get service minio -o jsonpath='{.spec.clusterIP}'):9000
+    # ./mc alias set minio $minio_addr minio minio123
+    # chassis_pod=$(kubectl get pods --selector=app.kubernetes.io/name=chassis --no-headers -o custom-columns=":metadata.name" | tr -d '\n')
+    # kubectl cp $chassis_pod:volume ./volume
+    # ls
     # ./mc cp --recursive volume/proxy minio/workspace/
-    ./mc cp --recursive volume/flavours minio/workspace/
+    # ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassisml-sdk sklearn xgboost torch mlflow'
     kubectl exec -ti $combinator_pod -- mkdir -p model
