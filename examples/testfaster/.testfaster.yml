@@ -9,7 +9,7 @@ base:
     RUN apt install gnupg2 software-properties-common rsync -y
     RUN curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
     RUN apt-add-repository "deb [arch=$(dpkg --print-architecture)] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-    RUN apt install terraform -y
+    RUN apt install terraform jq -y
 
   preload_docker_images:
     # Needed after initial startup
@@ -36,7 +36,7 @@ base:
     # already running when you testctl get
     #!/bin/bash
     set -euo pipefail
-    git clone https://github.com/combinator-ml/terraform-k8s-chassis repo
+    git clone https://github.com/carmilso/terraform-k8s-chassis-carmilso repo
     # git clone https://github.com/carmilso/terraform-kk repo
     cd repo/examples/testfaster
     terraform init
@@ -53,6 +53,8 @@ base:
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
     kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassisml-sdk sklearn xgboost torch mlflow'
     kubectl exec -ti $combinator_pod -- mkdir -p model
+    # Install KFServing. Versions above 0.5.1 doesn't work, so force it.
+    git clone --single-branch --branch v0.5.1 https://github.com/kubeflow/kfserving.git && cd kfserving && ./hack/quick_install.sh
 
   # Need kube 1.17 for kubeflow last time I checked (1.18 doesn't work).
   # https://github.com/kubeflow/kubeflow/issues/5246#issuecomment-682013220

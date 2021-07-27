@@ -60,7 +60,7 @@ resource "kubernetes_service" "jupyter" {
 # Any changes will only exist inside the pod. Download the notebook if you want a copy.
 resource "null_resource" "copy_notebook" {
   provisioner "local-exec" {
-    command = "kubectl -n ${var.namespace} rollout status deployment/combinator-jupyter-deployment && kubectl -n ${var.namespace} cp svc_demo.ipynb $(kubectl -n ${var.namespace} get po -l app=combinator-jupyter -o custom-columns=POD:.metadata.name --no-headers):/home/jovyan"
+    command = "kubectl -n ${var.namespace} rollout status deployment/combinator-jupyter-deployment && kubectl -n ${var.namespace} cp svc_demo.ipynb $(kubectl -n ${var.namespace} get po -l app=combinator-jupyter -o custom-columns=POD:.metadata.name --no-headers):/home/jovyan && kubectl -n ${var.namespace} cp kfserving.ipynb $(kubectl -n ${var.namespace} get po -l app=combinator-jupyter -o custom-columns=POD:.metadata.name --no-headers):/home/jovyan"
   }
   depends_on = [
     module.jupyter
