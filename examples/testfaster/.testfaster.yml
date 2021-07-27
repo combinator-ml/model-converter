@@ -36,7 +36,7 @@ base:
     # already running when you testctl get
     #!/bin/bash
     set -euo pipefail
-    git clone https://github.com/carmilso/terraform-k8s-chassis-carmilso repo
+    git clone https://github.com/combinator-ml/terraform-k8s-chassis repo
     # git clone https://github.com/carmilso/terraform-kk repo
     cd repo/examples/testfaster
     terraform init
