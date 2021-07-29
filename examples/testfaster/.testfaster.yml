@@ -81,4 +81,4 @@ launch:
   homepage: |
     Click the link to the left to get started with Chassis:
 
-    1. Click the Jupyter link and launch the `svc_demo.ipynb` notebook.
+    1. Click the Jupyter link and launch the `svc_demo.ipynb` notebook to build and push an MLflow model to Docker Hub, and the `kfserving.ipynb` notebook to deploy the model you just built to KFServing running inside the test drive.
