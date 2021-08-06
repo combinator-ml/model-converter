@@ -37,7 +37,6 @@ base:
     #!/bin/bash
     set -euo pipefail
     git clone https://github.com/combinator-ml/terraform-k8s-chassis repo
-    # git clone https://github.com/carmilso/terraform-kk repo
     cd repo/examples/testfaster
     terraform init
     KUBE_CONFIG_PATH=~/.kube/config terraform apply -auto-approve
@@ -51,7 +50,7 @@ base:
     # ./mc cp --recursive volume/proxy minio/workspace/
     # ./mc cp --recursive volume/flavours minio/workspace/
     combinator_pod=$(kubectl get pod -l app=combinator-jupyter -o custom-columns=":metadata.name" | tr -d '\n')
-    kubectl exec -ti $combinator_pod -- bash -c 'git clone https://github.com/mlopsworks/containerizer.git && pip install -e containerizer/chassisml-sdk sklearn xgboost torch mlflow'
+    kubectl exec -ti $combinator_pod -- bash -c 'pip install chassisml sklearn xgboost torch mlflow'
     kubectl exec -ti $combinator_pod -- mkdir -p model
     # Install KFServing. Versions above 0.5.1 doesn't work, so force it.
     git clone --single-branch --branch v0.5.1 https://github.com/kubeflow/kfserving.git && cd kfserving && ./hack/quick_install.sh
